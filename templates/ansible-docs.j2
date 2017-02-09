@@ -23,18 +23,19 @@
 ---
 {% for doc in modules.results %}
 
-## {{ doc['module'] }}
+## <a id="{{ doc['module'] }}"></a>{{ doc['module'] }}
 {{ doc['short_description'] }}
 
-  * Synopsis
-  * Options
-  * Examples
+  * [Synopsis](#{{ doc['module']}}-synopsis)
+  * [Options](#{{ doc['module']}}-options)
+  * [Examples](#{{ doc['module']}}-examples)
+  * [Notes](#{{ doc['module']}}-notes)
 
-#### Synopsis
-{% for each in doc['description'] %} {{ each }}
+#### <a id="{{ doc['module'] }}-synopsis"></a>Synopsis
+{% for each in doc['description'] %}* {{ each }}
 {% endfor %}
 
-#### Options
+#### <a id="{{ doc['module'] }}-options"></a>Options
 
 | Parameter     | required    | default  | choices    | comments |
 | ------------- |-------------| ---------|----------- |--------- |
@@ -49,7 +50,7 @@
 
  {% if doc['examples'] is defined %}
 
-#### Examples
+#### <a id="{{ doc['module'] }}-examples"></a>Examples
 
 ```
 {% for each in doc['examples'] %}
@@ -61,7 +62,7 @@
 
 {% for k,v in doc.iteritems() %}
 {% if k == 'notes' %}
-#### Notes
+#### <a id="{{ doc['module'] }}-notes"></a>Notes
 
 {% for note in v %}
 - {{ note }}
