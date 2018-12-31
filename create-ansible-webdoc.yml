@@ -6,16 +6,18 @@
   gather_facts: no
 
   vars:
-    heading: 'Ansible FILES modules'
-    subheading: 'Local copy of files modules'
+    heading: 'Ansible Modules for AWS API Gateway'
+    subheading: 'Granular, Idempotent Goodness'
     requirements:
       - See official Ansible docs
 
   tasks:
 
     - name: get docs and examples for modules
-      ansible_docstring: path=/usr/share/ansible/files/
+      ansible_docstring: path=/home/brian/work_repos/api-gateway-ansible/library/
       register: modules
 
     - name: build web/markdown ansible docs
-      template: src=templates/ansible-docs.j2 dest=web/ansiblefilesdoc.md
+      template:
+        src: templates/ansible-docs.j2
+        dest: /home/brian/work_repos/api-gateway-ansible/WEBDOCS.md

@@ -37,12 +37,22 @@
 
 #### <a id="{{ doc['module'] }}-options"></a>Options
 
-| Parameter     | required    | default  | choices    | comments |
-| ------------- |-------------| ---------|----------- |--------- |
+| Parent | Parameter     | required    | default  | choices    | comments |
+|--------| ------------- |-------------| ---------|----------- |--------- |
 {% for k,v in doc.iteritems() %}
 {% if k == 'options' %}
 {% for option,values in v.iteritems() %}
-| {{ option }}  |  {% if values.get('required') != None %} {{ values['required'] | replace('True','yes') | replace('False','no') }} {% endif %} | {% if values.get('default') != None %} {{ values['default'] | replace('None','')}} {% endif %} |{% if values.get('choices') != None %} <ul>{% for each in values['choices'] %} <li>{{ each }}</li> {% endfor %}</ul>{% endif %} | {% if values.get('description') != None %}{% for each in values['description'] %} {{ each }} {% endfor %}{% endif %} |
+| None | {{ option }} |  {% if values.get('required') != None %} {{ values['required'] | replace('True','yes') | replace('False','no') }} {% endif %} | {% if values.get('default') != None %} {{ values['default'] | replace('None','')}} {% endif %} |{% if values.get('choices') != None %} <ul>{% for each in values['choices'] %} <li>{{ each }}</li> {% endfor %}</ul>{% endif %} | {% if values.get('description') != None %}{% for each in values['description'] %} {{ each }} {% endfor %}{% endif %} |
+{% if 'options' in values %}
+{% for o2,vs2 in values['options'].iteritems() %}
+| {{ option }} | {{ o2 }} |  {% if vs2.get('required') != None %} {{ vs2['required'] | replace('True','yes') | replace('False','no') }} {% endif %} | {% if vs2.get('default') != None %} {{ vs2['default'] | replace('None','')}} {% endif %} |{% if vs2.get('choices') != None %} <ul>{% for each in vs2['choices'] %} <li>{{ each }}</li> {% endfor %}</ul>{% endif %} | {% if vs2.get('description') != None %}{% for each in vs2['description'] %} {{ each }} {% endfor %}{% endif %} |
+{% if 'options' in vs2 %}
+{% for o3,vs3 in vs2['options'].iteritems() %}
+| {{ option }}.<br />{{ o2 }} | {{ o3 }} |  {% if vs3.get('required') != None %} {{ vs3['required'] | replace('True','yes') | replace('False','no') }} {% endif %} | {% if vs3.get('default') != None %} {{ vs3['default'] | replace('None','')}} {% endif %} |{% if vs3.get('choices') != None %} <ul>{% for each in vs3['choices'] %} <li>{{ each }}</li> {% endfor %}</ul>{% endif %} | {% if vs3.get('description') != None %}{% for each in vs3['description'] %} {{ each }} {% endfor %}{% endif %} |
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}
 {% endfor %}
 {% endif %}
 {% endfor %}
